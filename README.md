@@ -1,1 +1,1 @@
-file for mips architecture
+Single cycle MIPS architecture 
