@@ -9,3 +9,5 @@ reg [length : 0] rgf_example [0 : vector_length];
 ex : wire [length : 0] wrv_example [0 : vector_length];
 5. for module declaration use mod_ :
 ex: module mod_dhamaka (...);
+
+hi, I work here now, lets crack the architecture.
