@@ -21,17 +21,19 @@ Aim : constants that are to be used in instruction decoding
 //----------------------------------
 /////////////////////////////////////////////////////////////////
 ///////////////////////opcodes///////////////////////////////////
-`define r_opcode 6'b000000
-`define b_opcode 6'b000001
-`define j_opcode 6'b000010
-`define i_opcode 6'b000011
+`define r_opcode   6'b000000
+`define lw_opcode  6'b000001
+`define j_opcode   6'b000010
+`define sw_opcode  6'b000011
+`define beq_opcode 6'b000100
+
 /////////////////////////////////////////////////////////////////
 //////////////////////funct//////////////////////////////////////
-`define ADD 6'b100000
-`define SUB 6'b100010
-`define AND 6'b100100
-`define OR 6'b100101
-`define SLT 6'b101010
+`define funct_add 6'b100000
+`define funct_sub 6'b100010
+`define funct_and 6'b100100
+`define funct_or  6'b100101
+`define funct_slt 6'b101010
 /////////////////////////////////////////////////////////////////
 ///////////////////////rs,rt,rd//////////////////////////////////
 `define r0 5'b00000

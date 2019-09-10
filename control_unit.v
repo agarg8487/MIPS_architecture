@@ -1,127 +1,156 @@
+`include "instruction_defines.v"
 `define aluopsize 2
 module mod_control_unit(    input[5:0] opcode,
-                            input[5:0] funct,  
-                            input reset,    
-                            output wire reg_dst,
-                            output wire jump,
-                            output wire branch,
-                            output wire mem_read,
-                            output wire mem_to_reg,
-                            output wire [`aluopsize:0] alu_op,
-                            output wire mem_write,
-                            output wire alu_src,
-                            output wire reg_write,                     
+                            input[5:0] funct,    
+                            output reg reg_dst,
+                            output reg jump,
+                            output reg branch,
+                            output reg mem_read,
+                            output reg mem_to_reg,
+                            output reg [`aluopsize:0] alu_op,
+                            output reg mem_write,
+                            output reg alu_src,
+                            output reg reg_write                     
    );  
- reg [7+`alusize:0] control_out;
- assign {reg_data,jump,branch,mem_read,mem_to_read,
-         alu_op,mem_write,alu_src,reg_write} = control_unit;
+ //reg [7+`alusize:0] control_out;
+ //assign {reg_data,jump,branch,mem_read,mem_to_read,
+ //       alu_op,mem_write,alu_src,reg_write} = control_unit;
+
+ // alu_op was based on lec 08 , this is sent to ALU directly
  always @(*)  
- begin  
-      if(reset == 1'b1) begin  
-                  
-      end  
-      else begin  
+  begin  
       case(opcode)   
-      `r_opcode: begin // add  
-                control_unit=
-                end  
-      3'b001: begin // sli  
-                reg_dst = 2'b00;  
-                mem_to_reg = 2'b00;  
-                alu_op = 2'b10;  
-                jump = 1'b0;  
-                branch = 1'b0;  
-                mem_read = 1'b0;  
-                mem_write = 1'b0;  
-                alu_src = 1'b1;  
-                reg_write = 1'b1;  
-                sign_or_zero = 1'b0;  
-                end  
-      3'b010: begin // j  
-                reg_dst = 2'b00;  
-                mem_to_reg = 2'b00;  
-                alu_op = 2'b00;  
-                jump = 1'b1;  
-                branch = 1'b0;  
-                mem_read = 1'b0;  
-                mem_write = 1'b0;  
-                alu_src = 1'b0;  
-                reg_write = 1'b0;  
-                sign_or_zero = 1'b1;  
-                end  
-      3'b011: begin // jal  
-                reg_dst = 2'b10;  
-                mem_to_reg = 2'b10;  
-                alu_op = 2'b00;  
-                jump = 1'b1;  
-                branch = 1'b0;  
-                mem_read = 1'b0;  
-                mem_write = 1'b0;  
-                alu_src = 1'b0;  
-                reg_write = 1'b1;  
-                sign_or_zero = 1'b1;  
-                end  
-      3'b100: begin // lw  
-                reg_dst = 2'b00;  
-                mem_to_reg = 2'b01;  
-                alu_op = 2'b11;  
-                jump = 1'b0;  
-                branch = 1'b0;  
-                mem_read = 1'b1;  
-                mem_write = 1'b0;  
-                alu_src = 1'b1;  
-                reg_write = 1'b1;  
-                sign_or_zero = 1'b1;  
-                end  
-      3'b101: begin // sw  
-                reg_dst = 2'b00;  
-                mem_to_reg = 2'b00;  
-                alu_op = 2'b11;  
-                jump = 1'b0;  
-                branch = 1'b0;  
-                mem_read = 1'b0;  
-                mem_write = 1'b1;  
-                alu_src = 1'b1;  
-                reg_write = 1'b0;  
-                sign_or_zero = 1'b1;  
-                end  
-      3'b110: begin // beq  
-                reg_dst = 2'b00;  
-                mem_to_reg = 2'b00;  
-                alu_op = 2'b01;  
-                jump = 1'b0;  
-                branch = 1'b1;  
-                mem_read = 1'b0;  
-                mem_write = 1'b0;  
-                alu_src = 1'b0;  
-                reg_write = 1'b0;  
-                sign_or_zero = 1'b1;  
-                end  
-      3'b111: begin // addi  
-                reg_dst = 2'b00;  
-                mem_to_reg = 2'b00;  
-                alu_op = 2'b11;  
-                jump = 1'b0;  
-                branch = 1'b0;  
-                mem_read = 1'b0;  
-                mem_write = 1'b0;  
-                alu_src = 1'b1;  
-                reg_write = 1'b1;  
-                sign_or_zero = 1'b1;  
-                end  
+      `r_opcode:begin   
+                case(funct)
+                `funct_add:begin
+                                reg_dst =1'b1 ;  
+                                jump =1'b0 ;  
+                                branch =1'b0 ;
+                                mem_read =1'b0 ;
+                                mem_to_reg =1'b0 ;  
+                                alu_op =3'b010 ;  
+                                mem_write =1'b0 ;  
+                                alu_src =1'b0 ;  
+                                reg_write =1'b1 ;
+                         end
+                `funct_sub:begin
+                                reg_dst =1'b1 ;  
+                                jump =1'b0 ;  
+                                branch =1'b0 ;
+                                mem_read =1'b0 ;
+                                mem_to_reg =1'b0 ;  
+                                alu_op =3'b110 ;  
+                                mem_write =1'b0 ;  
+                                alu_src =1'b0 ;  
+                                reg_write =1'b1 ;
+                        
+                         end    
+                `funct_and:begin
+                                reg_dst =1'b1 ;  
+                                jump =1'b0 ;  
+                                branch =1'b0 ;
+                                mem_read =1'b0 ;
+                                mem_to_reg =1'b0 ;  
+                                alu_op =3'b000 ;  
+                                mem_write =1'b0 ;  
+                                alu_src =1'b0 ;  
+                                reg_write =1'b1 ;
+                         end 
+                `funct_or :begin
+                                reg_dst =1'b1 ;  
+                                jump =1'b0 ;  
+                                branch =1'b0 ;
+                                mem_read =1'b0 ;
+                                mem_to_reg =1'b0 ;  
+                                alu_op =3'b001 ;  
+                                mem_write =1'b0 ;  
+                                alu_src =1'b0 ;  
+                                reg_write =1'b1 ;
+                         end 
+                `funct_slt:begin
+                                reg_dst =1'b1 ;  
+                                jump =1'b0 ;  
+                                branch =1'b0 ;
+                                mem_read =1'b0 ;
+                                mem_to_reg =1'b0 ;  
+                                alu_op =3'b111 ;  
+                                mem_write =1'b0 ;  
+                                alu_src =1'b0 ;  
+                                reg_write =1'b1 ;
+                         end
+                default :begin
+                                reg_dst =1'b0 ;  
+                                jump =1'b0 ;  
+                                branch =1'b0 ;
+                                mem_read =1'b0 ;
+                                mem_to_reg =1'b0 ;  
+                                alu_op =3'b101 ;  
+                                mem_write =1'b0 ;  
+                                alu_src =1'b0 ;  
+                                reg_write =1'b0 ;
+                         end         
+                endcase         
+        end
+        `lw_opcode: begin 
+                        reg_dst =1'b0 ;  
+                        jump =1'b0 ;
+                        branch =1'b0 ;
+                        mem_read =1'b1 ;
+                        mem_to_reg =1'b1 ;
+                        alu_op =3'b010 ;
+                        mem_write =1'b0 ; 
+                        alu_src =1'b1 ;
+                        reg_write =1'b1 ;
+        end  
+        `sw_opcode: begin 
+                        reg_dst =1'b0 ;  //i gave 0, it was dont care
+                        jump =1'b0 ;
+                        branch =1'b0 ;
+                        mem_read =1'b0 ;
+                        mem_to_reg =1'b0 ; // i gave 0 
+                        alu_op =3'b010 ;
+                        mem_write =1'b1 ; 
+                        alu_src =1'b1 ;
+                        reg_write =1'b1 ;
+        
+        end         
+        `beq_opcode: begin 
+                        reg_dst =1'b0 ;  // i gave 0 again
+                        jump =1'b0 ;
+                        branch =1'b1 ;
+                        mem_read =1'b0 ;
+                        mem_to_reg =1'b0 ; // i gave 0 
+                        alu_op =3'b110 ; // based on lec08
+                        mem_write =1'b0 ; 
+                        alu_src =1'b0 ;
+                        reg_write =1'b0 ;
+        
+        end  
+        `j_opcode: begin 
+                        reg_dst =1'b0 ;  
+                        jump =1'b1 ;
+                        branch =1'b0 ;
+                        mem_read =1'b0 ;
+                        mem_to_reg =1'b0 ;
+                        alu_op =3'b101 ;
+                        mem_write =1'b0 ; 
+                        alu_src =1'b0 ;
+                        reg_write =1'b0 ;
+        
+        end
+
       default: begin  
-                reg_dst = 2'b01;  
-                mem_to_reg = 2'b00;  
-                alu_op = 2'b00;  
-                jump = 1'b0;  
-                branch = 1'b0;  
-                mem_read = 1'b0;  
-                mem_write = 1'b0;  
-                alu_src = 1'b0;  
-                reg_write = 1'b1;  
-                sign_or_zero = 1'b1;  
+                        reg_dst =1'b0 ;  
+                        jump =1'b0 ;  
+                        branch =1'b0 ;
+                        mem_read =1'b0 ;
+                        mem_to_reg =1'b0 ;  
+                        alu_op =3'b101 ;  
+                        mem_write =1'b0 ;  
+                        alu_src =1'b0 ;  
+                         reg_write =1'b0 ;
+                  
                 end  
-      endcase  
-      end  
+      endcase    
  end  
  endmodule  
