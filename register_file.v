@@ -19,12 +19,11 @@ module mod_register_file (
                             input [4 : 0] read_address_2,
 
                             input reset,
-                            input write,
                             input clk,
-
+                            input write,
                             //output ports
-                            output [31 : 0] read_data_1,
-                            output [31 : 0] read_data_2
+                            output reg [31 : 0] read_data_1,
+                            output reg [31 : 0] read_data_2
                         );
 
 //----------------------------parameters---------------------------------
