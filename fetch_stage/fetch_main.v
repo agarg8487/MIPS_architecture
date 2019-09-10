@@ -1,6 +1,6 @@
 /* 
 Authors : Adtiya Terkar, 16EC01003, IIT Bhubaneswar
-Aim : PC mux implementation
+Aim : fetch main stage implementation
 */
 //////////////////////////////////////////////////////////////////////////////////////////
 //project includes
