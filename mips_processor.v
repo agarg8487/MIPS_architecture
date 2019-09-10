@@ -7,6 +7,7 @@ Aim :
 //project includes
 `include "register_file.v"
 `include "write_reg_mux.v"
+`include "alu_b_mux.v"
 /**/
 /////////////////////////////////////////////////////////////////////////////////////////
 
@@ -40,6 +41,9 @@ module mod_mips_processor (
     wire [31 : 0] wr_read_data_1;
     wire [31 : 0] wr_read_data_2;
 
+    //alu_b_mux wires
+    wire wr_alu_src;
+    wire [31 : 0] wr_alu_b;
 //-----------------------------------------------------------------------
 //-------------------------module instantiation--------------------------
     mod_register_file register_file ( 
@@ -67,6 +71,15 @@ module mod_mips_processor (
                                         //output ports
                                         .write_reg_add(wr_write_address)
                                     );
+    mod_alu_b_mux alu_b_mux (   
+                                //input ports
+                                .rs2_data(wr_read_data_2),
+                                .immediate(wr_se_ins_15_0),
+                                .alu_src(wr_alu_src),
+
+                                //output ports
+                                .alu_b(wr_alu_b)
+                            );
 //-----------------------------------------------------------------------
 //-------------------------hardware action-------------------------------
     //pc + 4
