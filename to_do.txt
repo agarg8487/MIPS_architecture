@@ -1,0 +1,25 @@
+tasks to be done:
+
+commenting the code,
+shifting all the `defines
+ALU design and integration in main_processor.v,  
+control unit modification for response to 'zero' signal from ALU.
+constructing test_bench.v
+(explain VJ testbench and dumping into processor )
+
+dumping processor state into text file,dump all the registers.
+
+
+python script for test assembly code to binary file,
+
+
+python simulator.
+
+
+understanding the how to use memory in FPGA, 
+
+
+working with Zynq board.
+
+
+pipelining -- ?
