@@ -6,26 +6,31 @@ import os
 import subprocess
 #--------------------------------------------------------------------------------------
 #-------------------------------project imports----------------------------------------
-import code_to_bin as ctb
-import subprocess
+#import code_to_bin as ctb
 #--------------------------------------------------------------------------------------
 
 #----------------check file existence, convert to binary--------------------------------
 os.chdir('../assembly_codes')
 print('printing all the files in the assembly_codes directory')
+print(os.path.exists('trial.vsat'))
 file_list = os.listdir()
-for i in range(file_list) :
-    print(file_list[i])
+for file_name in file_list :
+    print(file_name)
 
 file_req = input('enter your file name : ')
-while ((os.path.exists((file_req) == False) or (file_req != 'exit')) :
+while (not(os.path.exists(file_req))) :
     print('non existing file name, try again or type exit')
-    file_req = input('\nenter your file name :')
+    file_req = input('\nenter your file name : ')
+    if(file_req == 'exit') : exit()
 
-if(file_req == 'exit') : exit()
+instruction_list = list()
+with open(file_req,'r') as ins_file :
+    for line in ins_file :
+        for word in line.split():
+            instruction_list.append(word)
+            print(word) # testing the code
 
-instruction_list = open((file_req),'r')
-ctb.code_to_bin(instruction_list)
+#ctb.code_to_bin(instruction_list)
 #-------------------------------------------------------------------------------------
 
 #-----------------------------compile and run the test bench--------------------------

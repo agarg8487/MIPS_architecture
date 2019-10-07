@@ -69,3 +69,4 @@ Aim : constants that are to be used in instruction decoding
 `define r30 5'b11110
 `define r31 5'b11111
 /////////////////////////////////////////////////////////////////
+`define mem_size 000
