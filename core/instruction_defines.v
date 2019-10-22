@@ -38,7 +38,7 @@ Aim : constants that are to be used in instruction decoding
 ///////////////////////rs,rt,rd//////////////////////////////////
 `define r0 5'b00000
 `define r1 5'b00001
-`define r2 5'b00001
+`define r2 5'b00010
 `define r3 5'b00011
 `define r4 5'b00100
 `define r5 5'b00101
