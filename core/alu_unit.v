@@ -5,8 +5,9 @@ module alu_unit(output [31:0] alu_out,// 32 bit output
 );
 reg [31:0] alu_result;
 wire [32:0] temp;
-assign B= (alu_op[2])?(B^32'hffffffff):(B);
-assign temp = A+B;
+wire [32:0] temp_b;
+assign temp_b= (alu_op[2])?(B^32'hffffffff):(B);
+assign temp = A + temp_b;
 assign carry_out = temp[32]; //carry flag
 always@(*)
  begin
