@@ -9,7 +9,9 @@ Aim :
 `include "write_reg_mux.v"
 `include "alu_b_mux.v"
 `include "pc_mux.v"
-`include  "write_data_mux.v"
+`include "write_data_mux.v"
+`include "alu_unit.v"
+`include "control_unit.v"
 /**/
 /////////////////////////////////////////////////////////////////////////////////////////
 
@@ -21,7 +23,9 @@ module mod_mips_processor (
                             input reset,
                             //output ports
                             output reg [31 : 0] rg_pc,
-                            output wire [31 : 0] data_address
+                            output wire [31 : 0] data_address,
+                            output wire mem_read,
+                            output wire mem_write
                           );
 //----------------------------parameters---------------------------------
     //internal wires
@@ -55,8 +59,43 @@ module mod_mips_processor (
     //write_data_mux wires
     wire [31 : 0] wr_alu_data; //ALU LINE
     wire wr_mem_to_reg; //CONTROL LINE
+
+    //ALU wires
+    wire [2 : 0] wr_alu_op;
+    wire wr_carry_flag;
+
 //-----------------------------------------------------------------------
 //-------------------------module instantiation--------------------------
+    mod_control_unit control_unit   (
+
+                                        //input ports
+                                        .opcode(instruction[31:26]),
+                                        .funct(instruction[5:0]),
+                                        .carry_flag(wr_carry_flag),
+                                        //output ports
+                                        .reg_dst(wr_reg_dst),
+                                        .jump(wr_jump),
+                                        .branch(wr_branch),
+                                        .mem_read(mem_read), //???????
+                                        .mem_to_reg(wr_mem_to_reg),
+                                        .alu_op(wr_alu_op),
+                                        .mem_write(mem_write), //???????
+                                        .alu_src(wr_alu_src),
+                                        .reg_write(wr_rgf_write),
+
+                                    );
+
+    alu_unit alu_unit               (
+                                        //input ports
+                                        .alu_op(wr_alu_op),
+                                        .A(wr_read_data_1),
+                                        .B(wr_alu_b),
+
+                                        //output ports
+                                        .alu_out(wr_alu_data),
+                                        .carry_out(wr_carry_flag)
+                                    );
+
     mod_register_file register_file ( 
                                         //input ports
                                         .write_address(wr_write_address),
@@ -115,6 +154,8 @@ module mod_mips_processor (
                                         //output ports
                                         .write_data(wr_write_data)
                                     );
+
+    
 //-----------------------------------------------------------------------
 //-------------------------hardware action-------------------------------
     //pc + 4

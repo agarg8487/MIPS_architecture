@@ -1,7 +1,8 @@
 `include "instruction_defines.v"
 `define aluopsize 2
 module mod_control_unit(    input[5:0] opcode,
-                            input[5:0] funct,    
+                            input[5:0] funct,
+                            input carry_flag,    
                             output reg reg_dst,
                             output reg jump,
                             output reg branch,
@@ -76,7 +77,8 @@ module mod_control_unit(    input[5:0] opcode,
                                 alu_op =3'b111 ;  
                                 mem_write =1'b0 ;  
                                 alu_src =1'b0 ;  
-                                reg_write =1'b1 ;
+                                if (carry_flag == 1'b1) reg_write = 1'b1 ; // check the carry flag
+                                else reg_write = 1'b0;
                          end
                 default :begin
                                 reg_dst =1'b0 ;  

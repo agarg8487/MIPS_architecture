@@ -63,3 +63,6 @@ def reg_bin(word):
   return '11110'
  elif(word == 'r31'):
   return '11111'
+else :
+    print('invalid register name use r0-r31')
+    exit()

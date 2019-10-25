@@ -27,7 +27,7 @@ def code_to_bin (instruction_list,file_name) :
             i = i + 4
             file_handle.write(instruction_bin)
             file_handle.write('\n')
-        if (op_type == 'i') :
+        elif (op_type == 'i') :
             rs_bin = rgb.reg_bin(instruction_list[i + 1])
             rt_bin = rgb.reg_bin(instruction_list[i + 2])
             immd_bin = imb.immd_bin15(instruction_list[i + 3])
@@ -35,12 +35,20 @@ def code_to_bin (instruction_list,file_name) :
             i = i + 4
             file_handle.write(instruction_bin)
             file_handle.write('\n')
-        if (op_type == 'j') :
+        elif (op_type == 'j') :
             immd_bin = imb.immd_bin26(instruction_list[i + 1])
             instruction_bin = (opcode_bin + immd_bin)
             i = i + 2
             file_handle.write(instruction_bin)
             file_handle.write('\n')
+        else :
+            print('check the opcodes')
+            print('use add, sub, lw, sw, slt, beq or j')
+
+file_handle.close()
+exit()
+
+
 
 
 
