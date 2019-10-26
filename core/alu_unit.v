@@ -20,4 +20,4 @@ always@(*)
     endcase
  end
 assign alu_out=alu_result; // alu ou
-end
+endmodule

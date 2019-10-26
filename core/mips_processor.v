@@ -67,7 +67,6 @@ module mod_mips_processor (
 //-----------------------------------------------------------------------
 //-------------------------module instantiation--------------------------
     mod_control_unit control_unit   (
-
                                         //input ports
                                         .opcode(instruction[31:26]),
                                         .funct(instruction[5:0]),
@@ -81,8 +80,7 @@ module mod_mips_processor (
                                         .alu_op(wr_alu_op),
                                         .mem_write(mem_write), //???????
                                         .alu_src(wr_alu_src),
-                                        .reg_write(wr_rgf_write),
-
+                                        .reg_write(wr_rgf_write)
                                     );
 
     alu_unit alu_unit               (
