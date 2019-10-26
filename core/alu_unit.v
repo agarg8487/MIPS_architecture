@@ -5,18 +5,18 @@ module alu_unit(output [31:0] alu_out,// 32 bit output
 );
 reg [31:0] alu_result;
 wire [32:0] temp;
-assign M= (alu_op[2])?32'b1:32'b0;
-assign B=B^M;
-assign temp = A+B;
+wire [32:0] temp_b;
+assign temp_b= (alu_op[2])?(B^32'hffffffff):(B);
+assign temp = A + temp_b;
 assign carry_out = temp[32]; //carry flag
 always@(*)
  begin
     case(alu_op[1:0])
-     2'b10: alu_result=A+B;
+     2'b10: alu_result=temp[31:0];
      2'b00: alu_result = A&B ;
      2'b01: alu_result = A|B;
-     2'b11: alu_result= 32'b1; // slt
-     default: alu_result = A+B;
+     2'b11: alu_result= 32'hffffffff; // slt
+     default: alu_result = 32'hffffffff;
     endcase
  end
 assign alu_out=alu_result; // alu ou
