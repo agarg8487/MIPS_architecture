@@ -12,6 +12,7 @@ import immd_bin as imb
 #---------------------------------------------------------------------------
 def code_to_bin (instruction_list,file_name) :    
     i = 0
+    instruction_count = 0;
     file_name = (file_name + '.txt')
     file_handle = open(file_name,'w+')
     while ( i  < len(instruction_list)) :
@@ -45,8 +46,7 @@ def code_to_bin (instruction_list,file_name) :
             print('check the opcodes')
             print('use add, sub, lw, sw, slt, beq or j')
 
-file_handle.close()
-exit()
+    file_handle.close()
 
 
 
