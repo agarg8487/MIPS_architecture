@@ -31,7 +31,7 @@ with open(file_req,'r') as ins_file :
             instruction_list.append(word)
 #            print(word) # testing the code
 
-ctb.code_to_bin(instruction_list,file_name)
+instruction_count = ctb.code_to_bin(instruction_list,file_name)
 bin_file = file_name + '.txt'
 command = 'move' + ' ' + bin_file + ' ' + '../common_dump'
 print(command)
@@ -40,6 +40,9 @@ os.system(command)
 
 #-----------------------------compile and run the test bench--------------------------
 os.chdir('../test_benches')
+file_handle = open('ins_mem_size.v', 'w+')
+file_handle.write('`define ins_mem_size %d' %(instruction_count) )
+file_handle.close()
 if (os.path.exists('tb_microprocessor.v') == False) :
     print('could not find tb_microprocesor.v to run the test bench')
     exit()

@@ -12,7 +12,7 @@ import immd_bin as imb
 #---------------------------------------------------------------------------
 def code_to_bin (instruction_list,file_name) :    
     i = 0
-    instruction_count = 0;
+    instruction_count = 0
     file_name = (file_name + '.txt')
     file_handle = open(file_name,'w+')
     while ( i  < len(instruction_list)) :
@@ -20,6 +20,10 @@ def code_to_bin (instruction_list,file_name) :
         opcode_bin = opcode[0]
         funct_bin = opcode[1]
         op_type = opcode[2]
+
+        if ((op_type == 'r') or (op_type == 'i') or(op_type == 'j')) : 
+            instruction_count = instruction_count + 1
+
         if (op_type == 'r') :
             rs_bin = rgb.reg_bin(instruction_list[i + 1])
             rt_bin = rgb.reg_bin(instruction_list[i + 2])
@@ -47,6 +51,7 @@ def code_to_bin (instruction_list,file_name) :
             print('use add, sub, lw, sw, slt, beq or j')
 
     file_handle.close()
+    return instruction_count
 
 
 
