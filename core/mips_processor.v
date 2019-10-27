@@ -21,6 +21,7 @@ module mod_mips_processor (
                             input [31 : 0] data,
                             input clk,
                             input reset,
+                            input hold,
                             //output ports
                             output reg [31 : 0] rg_pc,
                             output wire [31 : 0] data_address,
@@ -42,7 +43,6 @@ module mod_mips_processor (
     //register_file wires
     wire [4 : 0] wr_write_address;
     wire [31 : 0] wr_write_data;
-    wire wr_rgf_reset;
     wire wr_rgf_write;
     wire [31 : 0] wr_read_data_1;
     wire [31 : 0] wr_read_data_2;
@@ -92,6 +92,7 @@ module mod_mips_processor (
                                         //output ports
                                         .alu_out(wr_alu_data),
                                         .carry_out(wr_carry_flag)
+                                        .zero_flag(wr_alu_zero)
                                     );
 
     mod_register_file register_file ( 
@@ -102,7 +103,7 @@ module mod_mips_processor (
                                         .read_address_2(instruction[20 : 16]),
 
                                         .clk(clk),
-                                        .reset(wr_rgf_reset),
+                                        .reset(reset),
                                         .write(wr_rgf_write),
 
                                         //output ports
@@ -170,6 +171,12 @@ module mod_mips_processor (
     assign wr_se_sh2_ins_15_0 [31 : 2] = wr_se_ins_15_0[29 : 0];
     assign wr_se_sh2_ins_15_0[1 : 0] = 0;
     assign wr_branch_address = wr_pc_plus_4 + wr_se_sh2_ins_15_0;
+
+    //update the program counter
+    always @(posedge clk) begin
+        if (reset == 1'b1) rg_pc <= 0;
+        else if (hold == 1'b0) rg_pc <= wr_next_pc;
+    end
 //-----------------------------------------------------------------------
 //----------------------functions and tasks------------------------------
 //-----------------------------------------------------------------------
