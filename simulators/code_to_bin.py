@@ -10,11 +10,36 @@ import reg_bin as rgb
 import opcode_bin as opb
 import immd_bin as imb
 #---------------------------------------------------------------------------
-def code_to_bin (instruction_list,file_name) :    
+def code_to_bin (instruction_list) :    
     i = 0
     instruction_count = 0
-    file_name = (file_name + '.txt')
+    file_name = ('binary_instructions.txt')
     file_handle = open(file_name,'w+')
+
+    ver_gen = input('wish to generate ROM memory? [y/n] :')
+    while ( not( (ver_gen == 'y') or (ver_gen == 'n') ) ) :
+        ver_gen = input('wish to generate ROM memory? [y/n] :')
+
+    if(ver_gen == 'y') :
+        verilog_file = open('instruction_mem_rom.v', 'w+')
+        verilog_file.write('/* \n')
+        verilog_file.write('Authors : Adtiya Terkar, 16EC01003, IIT Bhubaneswar\n')
+        verilog_file.write('Aim : A instruction provider\n')
+        verilog_file.write('*/ \n')
+        verilog_file.write('//////////////////////////////////////////////////////////////////////////////////////////\n')
+        verilog_file.write('//project includes\n')
+        verilog_file.write('/////////////////////////////////////////////////////////////////////////////////////////\n')
+        verilog_file.write('module mod_instruction_mem_rom (\n')
+        verilog_file.write('    //input ports\n')
+        verilog_file.write('    input [31 : 0] address,\n')
+        verilog_file.write('    //output ports\n')
+        verilog_file.write('    output reg [31 : 0] instruction,\n')
+        #verilog_file.write('    output reg ready\n')
+        verilog_file.write(');\n\n')
+        verilog_file.write('//-------------------------hardware action-------------------------------\n')
+        verilog_file.write('    always @(*) begin\n')
+        verilog_file.write('        case (address)\n')
+
     while ( i  < len(instruction_list)) :
         opcode = opb.opcode_bin(instruction_list[i])
         opcode_bin = opcode[0]
@@ -49,7 +74,17 @@ def code_to_bin (instruction_list,file_name) :
         else :
             print('check the opcodes')
             print('use add, sub, lw, sw, slt, beq or j')
+        
+        if(ver_gen == 'y') :
+            verilog_file.write(('            %d : instruction = ' %(instruction_count - 1)) + '32\'b' + instruction_bin + ';\n')
 
+
+    if(ver_gen == 'y') :
+        verilog_file.write('            default : instruction = 0;\n')
+        verilog_file.write('        endcase\n')
+        verilog_file.write('    end\n')
+        verilog_file.write('//-----------------------------------------------------------------------\n')
+        verilog_file.write('endmodule\n')
     file_handle.close()
     return instruction_count
 

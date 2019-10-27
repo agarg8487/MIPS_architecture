@@ -6,7 +6,7 @@ def immd_bin15(word):
     y='{:016b}'.format(0)
   else :
     y='{:016b}'.format(max_address_16 + int(word))
-  print(y)
+  #print(y)
   return y
 
 def immd_bin26(word):
