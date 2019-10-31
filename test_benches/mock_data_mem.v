@@ -1,15 +1,15 @@
 `define data_mem_size 32
 module data_memory  
  (  
-      input                         clk,  
+      input clk,  
       // address input, shared by read and write port  
-      input     [31:0]               mem_access_addr,  
+      input [31:0] mem_access_addr,  
       // write port  
-      input     [31:0]               mem_write_data,  
-      input                         mem_write_en,  
+      input [31:0] mem_write_data,  
+      input mem_write_en,  
       input mem_read_en,  
       // read port  
-      output  wire[31:0]               mem_read_data  
+      output wire[31:0] mem_read_data  
  );  
       integer i;  
       reg [31:0] ram [0:`data_mem_size];  

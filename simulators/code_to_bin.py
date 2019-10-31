@@ -31,7 +31,7 @@ def code_to_bin (instruction_list) :
         verilog_file.write('/////////////////////////////////////////////////////////////////////////////////////////\n')
         verilog_file.write('module mod_instruction_mem_rom (\n')
         verilog_file.write('    //input ports\n')
-        verilog_file.write('    input [31 : 0] address,\n')
+        verilog_file.write('    input [29 : 0] address,\n')
         verilog_file.write('    //output ports\n')
         verilog_file.write('    output reg [31 : 0] instruction,\n')
         #verilog_file.write('    output reg ready\n')

@@ -1,4 +1,4 @@
-`include "instruction_defines.v"
+//`include "instruction_defines.v"
 
 module mod_control_unit(    input[5:0] opcode,
                             input[5:0] funct,

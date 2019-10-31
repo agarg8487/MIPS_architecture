@@ -3,7 +3,7 @@ Authors : Aditya Terkar, 16EC01003, IIT Bhubaneswar
 Aim : 
 */
 //////////////////////////////////////////////////////////////////////////////////////////
-/**/
+/**
 //project includes
 `include "register_file.v"
 `include "write_reg_mux.v"
@@ -12,6 +12,7 @@ Aim :
 `include "write_data_mux.v"
 `include "alu_unit.v"
 `include "control_unit.v"
+`include "instructions_defines.v"
 /**/
 /////////////////////////////////////////////////////////////////////////////////////////
 
@@ -22,6 +23,10 @@ module mod_mips_processor (
                             input clk,
                             input reset,
                             input hold,
+
+                            //testing ports
+                            input dump_all,
+
                             //output ports
                             output reg [31 : 0] rg_pc,
                             output wire [31 : 0] data_address,
@@ -91,7 +96,7 @@ module mod_mips_processor (
 
                                         //output ports
                                         .alu_out(wr_alu_data),
-                                        .carry_out(wr_carry_flag)
+                                        .carry_out(wr_carry_flag),
                                         .zero_flag(wr_alu_zero)
                                     );
 
@@ -105,6 +110,11 @@ module mod_mips_processor (
                                         .clk(clk),
                                         .reset(reset),
                                         .write(wr_rgf_write),
+                                        .hold(hold),
+                                        
+                                        //testing purpose
+                                        .pc(rg_pc),
+                                        .dump_all(dump_all),
 
                                         //output ports
                                         .read_data_1(wr_read_data_1),
@@ -171,6 +181,9 @@ module mod_mips_processor (
     assign wr_se_sh2_ins_15_0 [31 : 2] = wr_se_ins_15_0[29 : 0];
     assign wr_se_sh2_ins_15_0[1 : 0] = 0;
     assign wr_branch_address = wr_pc_plus_4 + wr_se_sh2_ins_15_0;
+
+    //data_address
+    assign data_address = wr_alu_data;
 
     //update the program counter
     always @(posedge clk) begin

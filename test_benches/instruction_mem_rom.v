@@ -7,9 +7,9 @@ Aim : A instruction provider
 /////////////////////////////////////////////////////////////////////////////////////////
 module mod_instruction_mem_rom (
     //input ports
-    input [31 : 0] address,
+    input [29 : 0] address,
     //output ports
-    output reg [31 : 0] instruction,
+    output reg [31 : 0] instruction
 );
 
 //-------------------------hardware action-------------------------------
