@@ -22,9 +22,36 @@ Aim : A instruction provider
 
 module tb_microprocessor();
 //----------------------------parameters---------------------------------
-reg clk;
+    reg clk, reset, hold dump_all;
+    wire mem_read, mem_write;
+    wire [31 : 0] wr_pc;
+    wire [31 : 0] wr_instruction;
+    wire [31 : 0] wr_data;
+    wire [31 : 0] wr_data_address;
 //-----------------------------------------------------------------------
 //-------------------------module instantiation--------------------------
+    mod_instruction_mem_rom instruction_memory (
+        .address(wr_pc[31 : 29]),
+        .instruction(wr_instruction)
+    );
+    
+    mod_mips_processor dut (
+        //input ports
+        .instruction(wr_instruction),
+        .data(wr_data),
+        .clk(clk),
+        .reset(reset),
+        .hold(hold),
+
+        //testing ports
+        .dump_all(dump_all),
+
+        //output ports
+        .rg_pc(wr_pc)
+        .data_address(wr_data_address),
+        .mem_read(wr_mem_read),
+        .mem_write(wr_mem_write)
+    );
 //-----------------------------------------------------------------------
 //-------------------------hardware action-------------------------------
     initial begin 
