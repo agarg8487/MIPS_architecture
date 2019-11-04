@@ -22,8 +22,7 @@ while (not(os.path.exists(file_req))) :
     print('non existing file name, try again or type exit')
     file_req = input('\nenter your file name : ')
     if(file_req == 'exit') : exit()
-file_name_split = file_req.split('.')
-file_name = file_name_split[0]
+
 instruction_list = list()
 with open(file_req,'r') as ins_file :
     for line in ins_file :
@@ -31,11 +30,16 @@ with open(file_req,'r') as ins_file :
             instruction_list.append(word)
 #            print(word) # testing the code
 
-ctb.code_to_bin(instruction_list,file_name)
+instruction_count = ctb.code_to_bin(instruction_list)
+os.system('move binary_instructions.txt ../common_dump')
+os.system('move instruction_mem_rom.v ../test_benches')
 #-------------------------------------------------------------------------------------
 
 #-----------------------------compile and run the test bench--------------------------
 os.chdir('../test_benches')
+file_handle = open('ins_mem_size.v', 'w+')
+file_handle.write('`define ins_mem_size %d' %(instruction_count) )
+file_handle.close()
 if (os.path.exists('tb_microprocessor.v') == False) :
     print('could not find tb_microprocesor.v to run the test bench')
     exit()

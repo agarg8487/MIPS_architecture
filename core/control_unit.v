@@ -1,13 +1,14 @@
-`include "instruction_defines.v"
-`define aluopsize 2
+//`include "instruction_defines.v"
+
 module mod_control_unit(    input[5:0] opcode,
-                            input[5:0] funct,    
+                            input[5:0] funct,
+                            input carry_flag,    
                             output reg reg_dst,
                             output reg jump,
                             output reg branch,
                             output reg mem_read,
                             output reg mem_to_reg,
-                            output reg [`aluopsize:0] alu_op,
+                            output reg [2:0] alu_op,
                             output reg mem_write,
                             output reg alu_src,
                             output reg reg_write                     
@@ -76,7 +77,8 @@ module mod_control_unit(    input[5:0] opcode,
                                 alu_op =3'b111 ;  
                                 mem_write =1'b0 ;  
                                 alu_src =1'b0 ;  
-                                reg_write =1'b1 ;
+                                if (carry_flag == 1'b1) reg_write = 1'b1 ; // check the carry flag
+                                else reg_write = 1'b0;
                          end
                 default :begin
                                 reg_dst =1'b0 ;  
@@ -148,7 +150,7 @@ module mod_control_unit(    input[5:0] opcode,
                         alu_op =3'b101 ;  
                         mem_write =1'b0 ;  
                         alu_src =1'b0 ;  
-                         reg_write =1'b0 ;
+                        reg_write =1'b0 ;
                   
                 end  
       endcase    
