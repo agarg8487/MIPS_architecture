@@ -14,7 +14,7 @@ def opcode_bin(word):
  elif(word == 'sw'):
      return ['000011','000000','i']
  elif(word == 'beq'):
-     return ['000100','000000','i']
+     return ['000100','000000','b']
  elif(word == 'j'):
      return ['000010','000000','j']
  else : return ['111111','111111','e']

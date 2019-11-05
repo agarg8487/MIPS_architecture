@@ -193,7 +193,8 @@ module mod_mips_processor (
     always @(posedge clk) begin
         if (reset == 1'b1) rg_pc <= 0;
         else if (hold == 1'b0) rg_pc <= wr_next_pc;
-        //$strobe("%d-pc, %d-ins1, %d-ins2",rg_pc, instruction[20 : 16],instruction[15 : 11]);
+        //$strobe("alu :%d , alu_z : %b, alu_c: %b", wr_alu_data, wr_alu_zero, wr_carry_flag);
+        $strobe(wr_next_pc);
     end
 //-----------------------------------------------------------------------
 //----------------------functions and tasks------------------------------

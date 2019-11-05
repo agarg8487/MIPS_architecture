@@ -12,6 +12,7 @@ import immd_bin as imb
 #---------------------------------------------------------------------------
 def code_to_bin (instruction_list) :    
     i = 0
+    line_val = 0
     instruction_count = 0
     file_name = ('binary_instructions.txt')
     file_handle = open(file_name,'w+')
@@ -47,7 +48,7 @@ def code_to_bin (instruction_list) :
         funct_bin = opcode[1]
         op_type = opcode[2]
 
-        if ((op_type == 'r') or (op_type == 'i') or(op_type == 'j')) : 
+        if ((op_type == 'r') or (op_type == 'i') or(op_type == 'j') or (op_type == 'b')) : 
             instruction_count = instruction_count + 1
 
         if (op_type == 'r') :
@@ -63,6 +64,17 @@ def code_to_bin (instruction_list) :
             rs_bin = rgb.reg_bin(instruction_list[i + 2])
             immd_bin = imb.immd_bin15(instruction_list[i + 3])
             instruction_bin = (opcode_bin + rs_bin + rt_bin + immd_bin)
+            i = i + 4
+            file_handle.write(instruction_bin)
+            file_handle.write('\n')
+        elif (op_type == 'b') :
+            rs1_bin = rgb.reg_bin(instruction_list[i + 1])
+            rs2_bin = rgb.reg_bin(instruction_list[i + 2])
+            line_val = int(instruction_list[i + 3])
+            jump_amt = line_val - instruction_count
+            immd_bin = imb.immd_bin15_int(jump_amt - 1)
+            instruction_bin = (opcode_bin + rs1_bin + rs2_bin + immd_bin)
+            print(instruction_bin)
             i = i + 4
             file_handle.write(instruction_bin)
             file_handle.write('\n')

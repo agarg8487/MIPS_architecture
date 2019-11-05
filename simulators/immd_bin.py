@@ -18,3 +18,14 @@ def immd_bin26(word):
   else :
     x='{:026b}'.format(max_address_26 + int(word))  
   return x
+
+def immd_bin15_int(word) :
+  max_address_16 =65536
+  if(word >0) :
+    y='{:016b}'.format(word)
+  elif (int(word) == 0) :
+    y='{:016b}'.format(0)
+  else :
+    y='{:016b}'.format(max_address_16 + word)
+  #print(y)
+  return y
