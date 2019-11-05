@@ -30,6 +30,7 @@ module mod_mips_processor (
                             //output ports
                             output reg [31 : 0] rg_pc,
                             output wire [31 : 0] data_address,
+                            output wire [31 : 0] write_data,
                             output wire mem_read,
                             output wire mem_write
                           );
@@ -185,10 +186,14 @@ module mod_mips_processor (
     //data_address
     assign data_address = wr_alu_data;
 
+    // write data to memory
+    assign write_data = wr_read_data_2;
+
     //update the program counter
     always @(posedge clk) begin
         if (reset == 1'b1) rg_pc <= 0;
         else if (hold == 1'b0) rg_pc <= wr_next_pc;
+        //$strobe("%d-pc, %d-ins1, %d-ins2",rg_pc, instruction[20 : 16],instruction[15 : 11]);
     end
 //-----------------------------------------------------------------------
 //----------------------functions and tasks------------------------------

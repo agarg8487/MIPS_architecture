@@ -33,7 +33,7 @@ module mod_register_file (
                         );
 
 //----------------------------parameters---------------------------------
-    reg [31 : 0] rgf_mem [0 : 31];
+    reg [31 : 0] rgf_mem [1 : 31];
     integer i;
     integer file_handle; 
     
@@ -43,7 +43,7 @@ module mod_register_file (
 //-------------------------hardware action-------------------------------
     always @(posedge clk) begin
         if(reset == 1'b1) begin
-            for(i = 0; i < 31; i = i + 1) begin
+            for(i = 1; i < 32; i = i + 1) begin
                 rgf_mem[i] <= 0;
             end
         end else begin 
@@ -65,10 +65,19 @@ module mod_register_file (
     initial begin file_handle = $fopen("../common_dump/architectural_state.txt"); end
     always @(posedge dump_all) begin
         $fdisplay(file_handle,"rg_pc : %d",pc);
-        for (i = 0; i < 32; i = i + 1) begin
+        $display(pc);
+        $display("---dumping all the values stored in registers---");
+        for (i = 1; i < 32; i = i + 1) begin
             $fdisplay(file_handle,"register %d - %d", i, rgf_mem[i]);
+           // $display("register %d - %d", i, rgf_mem[i]);
         end
     end
+
+   /*  always @(*) begin
+        for (i = 0; i < 32; i = i + 1) begin
+            $display(file_handle,"register %d - %d", i, rgf_mem[i]);
+        end
+    end */
 //-----------------------------------------------------------------------
 //----------------------functions and tasks------------------------------
 //-----------------------------------------------------------------------

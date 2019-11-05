@@ -34,6 +34,7 @@ def code_to_bin (instruction_list) :
         verilog_file.write('    input [29 : 0] address,\n')
         verilog_file.write('    //output ports\n')
         verilog_file.write('    output reg [31 : 0] instruction,\n')
+        verilog_file.write('    output wire mem_end')
         #verilog_file.write('    output reg ready\n')
         verilog_file.write(');\n\n')
         verilog_file.write('//-------------------------hardware action-------------------------------\n')
@@ -50,16 +51,16 @@ def code_to_bin (instruction_list) :
             instruction_count = instruction_count + 1
 
         if (op_type == 'r') :
-            rs_bin = rgb.reg_bin(instruction_list[i + 1])
-            rt_bin = rgb.reg_bin(instruction_list[i + 2])
-            rd_bin = rgb.reg_bin(instruction_list[i + 3])
+            rd_bin = rgb.reg_bin(instruction_list[i + 1])
+            rs_bin = rgb.reg_bin(instruction_list[i + 2])
+            rt_bin = rgb.reg_bin(instruction_list[i + 3])
             instruction_bin = (opcode_bin + rs_bin + rt_bin + rd_bin + '00000' + funct_bin)
             i = i + 4
             file_handle.write(instruction_bin)
             file_handle.write('\n')
         elif (op_type == 'i') :
-            rs_bin = rgb.reg_bin(instruction_list[i + 1])
-            rt_bin = rgb.reg_bin(instruction_list[i + 2])
+            rt_bin = rgb.reg_bin(instruction_list[i + 1])
+            rs_bin = rgb.reg_bin(instruction_list[i + 2])
             immd_bin = imb.immd_bin15(instruction_list[i + 3])
             instruction_bin = (opcode_bin + rs_bin + rt_bin + immd_bin)
             i = i + 4
@@ -83,6 +84,7 @@ def code_to_bin (instruction_list) :
         verilog_file.write('            default : instruction = 0;\n')
         verilog_file.write('        endcase\n')
         verilog_file.write('    end\n')
+        verilog_file.write('    assign mem_end = (address > %d) ? 1\'b1 : 1\'b0;' %(instruction_count - 1))
         verilog_file.write('//-----------------------------------------------------------------------\n')
         verilog_file.write('endmodule\n')
     file_handle.close()

@@ -23,7 +23,7 @@ def reg_bin(word):
   return '01010'
  elif(word == 'r11'):
   return '01011'
- elif(word == 'r2'):
+ elif(word == 'r12'):
   return '01100'
  elif(word == 'r13'):
   return '01101'
@@ -64,6 +64,6 @@ def reg_bin(word):
  elif(word == 'r31'):
   return '11111'
  else :
-    print('invalid register name use r0-r31')
+    print('invalid register name use r0-r31' + 'found' + word)
     exit()
     return '0'

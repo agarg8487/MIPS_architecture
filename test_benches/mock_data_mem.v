@@ -1,4 +1,4 @@
-`define data_mem_size 32
+`define data_mem_size 250
 module data_memory  
  (  
       input clk,  
@@ -11,11 +11,17 @@ module data_memory
       // read port  
       output wire[31:0] mem_read_data  
  );  
-      integer i;  
+      integer i;
+      integer memory_file;
       reg [31:0] ram [0:`data_mem_size];  
-      initial begin  
-           for(i=0;i<=`data_mem_size;i=i+1)  
-                ram[i] <= 32'b0;  
+      initial begin
+          memory_file = $fopen("../common_dump/init_memory_content.txt");  
+          for(i=0;i<=`data_mem_size;i=i+1) begin 
+                ram[i] = $random;
+          end
+          for(i=0;i<=`data_mem_size;i=i+1) begin  
+               $fdisplay(memory_file, "memory location %d : %d", i, ram[i]);   
+          end
       end  
       always @(posedge clk) begin  
            if (mem_write_en)  
