@@ -93,6 +93,17 @@ module mod_control_unit(    input[5:0] opcode,
                          end         
                 endcase         
         end
+        `addi_opcode:begin // i have doubt in this section
+                                reg_dst =1'b0 ;  
+                                jump =1'b0 ;  
+                                branch =1'b0 ;
+                                mem_read =1'b0 ;
+                                mem_to_reg =1'b0 ;  
+                                alu_op =3'b010 ;  
+                                mem_write =1'b0 ;  
+                                alu_src =1'b1 ;  
+                                reg_write =1'b1 ;
+        end
         `lw_opcode: begin 
                         reg_dst =1'b0 ;  
                         jump =1'b0 ;

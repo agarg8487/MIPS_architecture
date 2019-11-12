@@ -26,6 +26,7 @@ Aim : constants that are to be used in instruction decoding
 `define j_opcode   6'b000010
 `define sw_opcode  6'b000011
 `define beq_opcode 6'b000100
+`define addi_opcode 6'b001000 //added this part 
 
 /////////////////////////////////////////////////////////////////
 //////////////////////funct//////////////////////////////////////
@@ -34,6 +35,7 @@ Aim : constants that are to be used in instruction decoding
 `define funct_and 6'b100100
 `define funct_or  6'b100101
 `define funct_slt 6'b101010
+
 /////////////////////////////////////////////////////////////////
 ///////////////////////rs,rt,rd//////////////////////////////////
 `define r0 5'b00000

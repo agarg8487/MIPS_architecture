@@ -17,4 +17,6 @@ def opcode_bin(word):
      return ['000100','000000','b']
  elif(word == 'j'):
      return ['000010','000000','j']
+ elif(word =='addi')
+     return ['001000','000000','i']
  else : return ['111111','111111','e']
