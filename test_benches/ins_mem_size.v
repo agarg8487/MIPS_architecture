@@ -1,1 +1,1 @@
-`define ins_mem_size 35
+`define ins_mem_size 3

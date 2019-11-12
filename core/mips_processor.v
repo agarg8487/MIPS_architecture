@@ -94,6 +94,7 @@ module mod_mips_processor (
                                         .alu_op(wr_alu_op),
                                         .A(wr_read_data_1),
                                         .B(wr_alu_b),
+                                        .clk(clk),// TESTING only 
 
                                         //output ports
                                         .alu_out(wr_alu_data),
@@ -194,7 +195,7 @@ module mod_mips_processor (
         if (reset == 1'b1) rg_pc <= 0;
         else if (hold == 1'b0) rg_pc <= wr_next_pc;
         //$strobe("alu :%d , alu_z : %b, alu_c: %b", wr_alu_data, wr_alu_zero, wr_carry_flag);
-        $strobe(wr_next_pc);
+        //$strobe("%b", instruction);
     end
 //-----------------------------------------------------------------------
 //----------------------functions and tasks------------------------------

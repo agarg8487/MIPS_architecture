@@ -44,7 +44,6 @@ module mod_control_unit(    input[5:0] opcode,
                                 mem_write =1'b0 ;  
                                 alu_src =1'b0 ;  
                                 reg_write =1'b1 ;
-                        
                          end    
                 `funct_and:begin
                                 reg_dst =1'b1 ;  
@@ -80,7 +79,7 @@ module mod_control_unit(    input[5:0] opcode,
                                 if (carry_flag == 1'b1) reg_write = 1'b1 ; // check the carry flag
                                 else reg_write = 1'b0;
                          end
-                default :begin
+                default : begin
                                 reg_dst =1'b0 ;  
                                 jump =1'b0 ;  
                                 branch =1'b0 ;
@@ -90,6 +89,7 @@ module mod_control_unit(    input[5:0] opcode,
                                 mem_write =1'b0 ;  
                                 alu_src =1'b0 ;  
                                 reg_write =1'b0 ;
+                               
                          end         
                 endcase         
         end
@@ -162,7 +162,7 @@ module mod_control_unit(    input[5:0] opcode,
                         mem_write =1'b0 ;  
                         alu_src =1'b0 ;  
                         reg_write =1'b0 ;
-                  
+                     //$display("defaulted");
                 end  
       endcase    
  end  
