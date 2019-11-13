@@ -33,15 +33,17 @@ module mod_controller (
 
 		output wire [3 : 0] anode,
 		output wire [7 : 0] cathode,
-		output wire completed,
+		output reg completed,
+		output reg not_completed 
 	);
 
 //-----------------------parameters---------------------------------
 	//mips processor ports
 	wire [31 : 0] wr_instruction;
 	wire [31 : 0] wr_data;
-	wire wr_divided_clk;
+	wire rg_divided_clk;
 	wire ins_mem_end;
+	reg [31 : 0] internal_reg;
 
 	//instruction memory ports
 	wire [31 : 0] wr_pc;
@@ -107,7 +109,7 @@ module mod_controller (
 		.mem_write(wr_mem_write),
 		.data_address_2(rg_mem_ptr),
 		.reset(reset),
-		.clk(wr_divided_clk),
+		.clk(rg_divided_clk),
 
 		//output ports
 		.data_out_1(wr_data),
@@ -215,4 +217,21 @@ module mod_controller (
 	always @(posedge clk) rg_data_2 <= (hex_or_dec) ? (rg_hex_d2) : (rg_decimal_d2);
 	always @(posedge clk) rg_data_3 <= (hex_or_dec) ? (rg_hex_d3) : (rg_decimal_d3);
 //------------------------------------------------------------------
+
+//--------------hardware action for clock to processor--------------
+	always @(posedge clk) begin
+        if(reset) internal_reg <= 0;
+        else if (internal_reg < 15000) internal_reg <= internal_reg + 1;
+        else internal_reg <= 0;
+    end
+   
+    always @(posedge clk) begin
+        if (internal_reg < 7500) rg_divided_clk <= 1'b1;
+        else rg_divided_clk <= 1'b0;
+    end
+   
+   always @(posedge clk) begin
+		completed <= ins_mem_end;
+		not_completed <= ~ins_mem_end;
+   end
 endmodule
