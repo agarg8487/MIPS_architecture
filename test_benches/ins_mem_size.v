@@ -1,1 +1,1 @@
-`define ins_mem_size 4
+`define ins_mem_size 1
