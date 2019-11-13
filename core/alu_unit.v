@@ -3,7 +3,8 @@ module alu_unit(output [31:0] alu_out,// 32 bit output
                 output zero_flag,
 
                 input [2 : 0]alu_op, // alu selection
-                input [31:0] A,B //alu inputs
+                input [31:0] A,B, //alu inputs
+                input clk //  for TESTing 
 );
 reg [31:0] alu_result;
 wire [32:0] temp;
@@ -21,7 +22,10 @@ always@(*)
      default: alu_result = 32'hffffffff;
     endcase
  end
-
+always@(posedge clk)
+begin
+   $strobe("temp B = %d , temp=%d , A=%d,B=%d, alu_result=%d",temp_b,temp,A,B,alu_result);
+end
 assign zero_flag = (alu_result == 0) ? 1'b1 : 1'b0;
 assign alu_out=alu_result; // alu output
 endmodule
