@@ -23,10 +23,9 @@ module mod_mips_processor (
                             input clk,
                             input reset,
                             input hold,
-
-                            //testing ports
+/////////////////////////comment out for synthesis/////////////////////////
                             input dump_all,
-
+/////////////////////////comment out for synthesis/////////////////////////
                             //output ports
                             output reg [31 : 0] rg_pc,
                             output wire [31 : 0] data_address,
@@ -115,9 +114,10 @@ module mod_mips_processor (
                                         .hold(hold),
                                         
                                         //testing purpose
+/////////////////////////comment out for synthesis/////////////////////////
                                         .pc(rg_pc),
                                         .dump_all(dump_all),
-
+/////////////////////////comment out for synthesis/////////////////////////
                                         //output ports
                                         .read_data_1(wr_read_data_1),
                                         .read_data_2(wr_read_data_2)
@@ -194,8 +194,11 @@ module mod_mips_processor (
     always @(posedge clk) begin
         if (reset == 1'b1) rg_pc <= 0;
         else if (hold == 1'b0) rg_pc <= wr_next_pc;
+
+/////////////////////////comment out for synthesis/////////////////////////        
         //$strobe("alu :%d , alu_z : %b, alu_c: %b", wr_alu_data, wr_alu_zero, wr_carry_flag);
         //$strobe("%b", instruction);
+/////////////////////////comment out for synthesis/////////////////////////
     end
 //-----------------------------------------------------------------------
 //----------------------functions and tasks------------------------------

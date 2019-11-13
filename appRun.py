@@ -1,5 +1,7 @@
 import tkinter 
-import os	 
+import os
+import converter
+import tester	 
 from tkinter import *
 from tkinter.messagebox import *
 from tkinter.filedialog import *
@@ -175,11 +177,11 @@ class Notepad:
 			file.write(self.__thisTextArea.get(1.0,END)) 
 			file.close() 
 
-	def __convert(self): 
-		os.system("python result.py") 
-
+	def __convert(self):
+		print(os.path.basename(self.__file))
+		converter.converter(os.path.basename(self.__file)) 
 	def __run(self): 
-		os.system("python result.py") 
+		os.system("python tester.py")
 
 	def run(self): 
 

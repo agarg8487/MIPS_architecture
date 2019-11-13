@@ -162,7 +162,9 @@ module mod_control_unit(    input[5:0] opcode,
                         mem_write =1'b0 ;  
                         alu_src =1'b0 ;  
                         reg_write =1'b0 ;
+/////////////////////////comment out for synthesis/////////////////////////                        
                      //$display("defaulted");
+/////////////////////////comment out for synthesis/////////////////////////                     
                 end  
       endcase    
  end  

@@ -23,7 +23,6 @@
 module mod_controller (
 
 		input reset,
-		input run,
 		input clk,
 		input show_mem_ptr,
 		input incr_mem_ptr,

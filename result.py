@@ -534,18 +534,19 @@ if __name__ == "__main__":
     filepath = 'final.txt'
     arr=[]
     for i in range(0,32):
-	arr.append([])
+	    arr.append([])
     for i in range(0,32):
-	for j in range(0,2):
-		arr[i].append("a")
-		arr[i][j]=""
+	    for j in range(0,2):
+		    arr[i].append("a")
+		    arr[i][j]=""
     
     i=0
     with open(filepath) as fp:
-      line = fp.readline()
-      while line:
-        arr1=line.split("-")
-	for j in range(0,2):
+        line = fp.readline()
+        while line:
+            arr1=line.split("-")
+	
+    for j in range(0,2):
 		arr[i][j]=arr1[j]
         line = fp.readline()
 	i=i+1

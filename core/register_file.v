@@ -23,10 +23,11 @@ module mod_register_file (
                             input write,
                             input hold,
 
+/////////////////////////comment out for synthesis/////////////////////////
                             //testing purpose
                             input [31 : 0] pc,
                             input dump_all,
-
+/////////////////////////comment out for synthesis/////////////////////////
                             //output ports
                             output reg [31 : 0] read_data_1,
                             output reg [31 : 0] read_data_2
@@ -61,6 +62,7 @@ module mod_register_file (
         else read_data_2 = rgf_mem[read_address_2];
     end
 
+/////////////////////////comment out for synthesis/////////////////////////
     //testing code
     initial begin file_handle = $fopen("../common_dump/architectural_state.txt"); end
     always @(posedge dump_all) begin
@@ -78,6 +80,7 @@ module mod_register_file (
             $display(file_handle,"register %d - %d", i, rgf_mem[i]);
         end
     end */
+/////////////////////////comment out for synthesis/////////////////////////    
 //-----------------------------------------------------------------------
 //----------------------functions and tasks------------------------------
 //-----------------------------------------------------------------------
