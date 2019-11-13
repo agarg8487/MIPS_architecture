@@ -124,7 +124,7 @@ module mod_control_unit(    input[5:0] opcode,
                         alu_op =3'b010 ;
                         mem_write =1'b1 ; 
                         alu_src =1'b1 ;
-                        reg_write =1'b1 ;
+                        reg_write =1'b0 ;
         
         end         
         `beq_opcode: begin 

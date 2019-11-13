@@ -67,6 +67,7 @@ module tb_microprocessor();
         .mem_access_addr(wr_data_address),
         .mem_write_en(wr_mem_write),
         .mem_read_en(wr_mem_read),
+        .dump_mem(wr_mem_end),
 
         //output ports
         .mem_read_data(wr_data)

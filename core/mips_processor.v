@@ -94,7 +94,7 @@ module mod_mips_processor (
                                         .alu_op(wr_alu_op),
                                         .A(wr_read_data_1),
                                         .B(wr_alu_b),
-                                        .clk(clk),// TESTING only 
+                                        // .clk(clk),// TESTING only 
 
                                         //output ports
                                         .alu_out(wr_alu_data),

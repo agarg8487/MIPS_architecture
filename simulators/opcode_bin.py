@@ -8,7 +8,7 @@ def opcode_bin(word):
  elif(word == 'or'):
       return ['000000','100101','r']
  elif(word == 'slt'):
-      return ['000000','101010','r']
+      return ['000000','101010','s']
  elif(word == 'lw'):
       return ['000001','000000','i']
  elif(word == 'sw'):

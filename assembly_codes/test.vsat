@@ -1,0 +1,4 @@
+sub r1 r1 r1
+addi r3 r1 1
+sw r1 r0 5
+slt r2 r1 r3

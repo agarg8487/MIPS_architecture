@@ -64,11 +64,11 @@ module mod_register_file (
     //testing code
     initial begin file_handle = $fopen("../common_dump/architectural_state.txt"); end
     always @(posedge dump_all) begin
-        $fdisplay(file_handle,"rg_pc : %d",pc);
+        $fdisplay(file_handle,pc);// removed %d
         $display(pc);
         $display("---dumping all the values stored in registers---");
         for (i = 1; i < 32; i = i + 1) begin
-            $fdisplay(file_handle,"register %d - %d", i, rgf_mem[i]);
+            $fdisplay(file_handle, rgf_mem[i]);//removed %d
            // $display("register %d - %d", i, rgf_mem[i]);
         end
     end

@@ -48,13 +48,21 @@ def code_to_bin (instruction_list) :
         funct_bin = opcode[1]
         op_type = opcode[2]
 
-        if ((op_type == 'r') or (op_type == 'i') or(op_type == 'j') or (op_type == 'b')) : 
+        if ((op_type == 'r') or (op_type == 'i') or(op_type == 'j') or (op_type == 'b') or (op_type == 's')) : 
             instruction_count = instruction_count + 1
 
         if (op_type == 'r') :
             rd_bin = rgb.reg_bin(instruction_list[i + 1])
             rs_bin = rgb.reg_bin(instruction_list[i + 2])
             rt_bin = rgb.reg_bin(instruction_list[i + 3])
+            instruction_bin = (opcode_bin + rs_bin + rt_bin + rd_bin + '00000' + funct_bin)
+            i = i + 4
+            file_handle.write(instruction_bin)
+            file_handle.write('\n')
+        elif (op_type == 's') :
+            rd_bin = rgb.reg_bin(instruction_list[i + 1])
+            rs_bin = rgb.reg_bin(instruction_list[i + 3])
+            rt_bin = rgb.reg_bin(instruction_list[i + 2])
             instruction_bin = (opcode_bin + rs_bin + rt_bin + rd_bin + '00000' + funct_bin)
             i = i + 4
             file_handle.write(instruction_bin)
