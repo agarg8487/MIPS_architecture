@@ -90,19 +90,17 @@ class Notepad:
 										command=self.__convert)			 
 	
 		# to give a feature of copy	 
-		self.__thisEditMenu.add_command(label="Run", 
-										command=self.__run)		 
+		self.__thisEditMenu.add_command(label="Simulate", 
+										command=self.__run)	
+	        # to give a feature of copy	 
+		self.__thisEditMenu.add_command(label="Show Registers", 
+										command=self.__showRegisters)		 	 
 				 
 		
 		# To give a feature of editing 
-		self.__thisMenuBar.add_cascade(label="Commands", 
+		self.__thisMenuBar.add_cascade(label="Actions", 
 									menu=self.__thisEditMenu)	 
 		
-		# To create a feature of description of the notepad 
-		self.__thisHelpMenu.add_command(label="Show Registers", 
-										command=self.__showRegisters) 
-		self.__thisMenuBar.add_cascade(label="Result", 
-									menu=self.__thisHelpMenu)
          
 
 		self.__root.config(menu=self.__thisMenuBar) 

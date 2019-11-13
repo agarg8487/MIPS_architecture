@@ -527,14 +527,14 @@ if __name__ == "__main__":
 
     root = Tk()
 
-    table = Table(root, ["column A", "column B"], column_minwidths=[None, None])
+    table = Table(root, ["Register Name", "Value"], column_minwidths=[None, None])
     table.pack(padx=10,pady=10)
     os.system("sed -e '0,/:/s/:/-/' common_dump/architectural_state.txt > temp.txt")
     os.system("sed -e 's/[ \t]//g' temp.txt > final.txt")
     filepath = 'final.txt'
     arr=[]
     for i in range(0,32):
-	arr.append([]);
+	arr.append([])
     for i in range(0,32):
 	for j in range(0,2):
 		arr[i].append("a")
