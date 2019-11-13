@@ -10,7 +10,8 @@ module mod_instruction_mem_rom (
     input [29 : 0] address,
     //output ports
     output reg [31 : 0] instruction,
-    output wire mem_end);
+    output wire mem_end
+    );
 
 //-------------------------hardware action-------------------------------
     always @(*) begin
