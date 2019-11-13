@@ -62,6 +62,12 @@ module seg_led_driver(
             4'b0111: led_data_0 = 7'b0001111; // "7"
             4'b1000: led_data_0 = 7'b0000000; // "8"    
             4'b1001: led_data_0 = 7'b0000100; // "9"
+            4'b1001: led_data_0 = 7'b0000010; // "a"
+            4'b1001: led_data_0 = 7'b1100000; // "b"
+            4'b1001: led_data_0 = 7'b0110000; // "C"
+            4'b1001: led_data_0 = 7'b1000010; // "d"
+            4'b1001: led_data_0 = 7'b0010000; // "E"
+            4'b1001: led_data_0 = 7'b0111000; // "F"
             default: led_data_0 = 7'b0000001; // "0"
         endcase
     end
@@ -78,6 +84,12 @@ module seg_led_driver(
             4'b0111: led_data_1 = 7'b0001111; // "7"
             4'b1000: led_data_1 = 7'b0000000; // "8"    
             4'b1001: led_data_1 = 7'b0000100; // "9"
+            4'b1001: led_data_1 = 7'b0000010; // "a"
+            4'b1001: led_data_1 = 7'b1100000; // "b"
+            4'b1001: led_data_1 = 7'b0110000; // "C"
+            4'b1001: led_data_1 = 7'b1000010; // "d"
+            4'b1001: led_data_1 = 7'b0010000; // "E"
+            4'b1001: led_data_1 = 7'b0111000; // "F"
             default: led_data_1 = 7'b0000001; // "0"
         endcase
     end
@@ -94,6 +106,12 @@ module seg_led_driver(
             4'b0111: led_data_2 = 7'b0001111; // "7"
             4'b1000: led_data_2 = 7'b0000000; // "8"    
             4'b1001: led_data_2 = 7'b0000100; // "9"
+            4'b1001: led_data_2 = 7'b0000010; // "a"
+            4'b1001: led_data_2 = 7'b1100000; // "b"
+            4'b1001: led_data_2 = 7'b0110000; // "C"
+            4'b1001: led_data_2 = 7'b1000010; // "d"
+            4'b1001: led_data_2 = 7'b0010000; // "E"
+            4'b1001: led_data_2 = 7'b0111000; // "F"
             default: led_data_2 = 7'b0000001; // "0"
         endcase
     end
@@ -110,6 +128,12 @@ module seg_led_driver(
             4'b0111: led_data_3 = 7'b0001111; // "7"
             4'b1000: led_data_3 = 7'b0000000; // "8"    
             4'b1001: led_data_3 = 7'b0000100; // "9"
+            4'b1001: led_data_3 = 7'b0000010; // "a"
+            4'b1001: led_data_3 = 7'b1100000; // "b"
+            4'b1001: led_data_3 = 7'b0110000; // "C"
+            4'b1001: led_data_3 = 7'b1000010; // "d"
+            4'b1001: led_data_3 = 7'b0010000; // "E"
+            4'b1001: led_data_3 = 7'b0111000; // "F"
             default: led_data_3 = 7'b0000001; // "0"
         endcase
     end
