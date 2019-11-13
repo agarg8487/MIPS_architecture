@@ -5,7 +5,7 @@ Aim : A instruction provider
 //////////////////////////////////////////////////////////////////////////////////////////
 //project includes
 `include "instruction_mem_rom.v"
-`include "mock_data_mem.v"
+`include "data_mem.v"
 `include "../core/mips_processor.v"
 
 //---------mips_processor includes------------
@@ -59,18 +59,32 @@ module tb_microprocessor();
         .mem_write(wr_mem_write)
     );
 
-    data_memory data_mem (
+    // data_memory data_mem (
+        
+    //     //input ports
+    //     .clk(clk),
+    //     .mem_write_data(wr_write_data),
+    //     .mem_access_addr(wr_data_address),
+    //     .mem_write_en(wr_mem_write),
+    //     .mem_read_en(wr_mem_read),
+    //     .dump_mem(wr_mem_end),
+
+    //     //output ports
+    //     .mem_read_data(wr_data)
+    // );
+
+    mod_data_mem data_mem (
         
         //input ports
         .clk(clk),
-        .mem_write_data(wr_write_data),
-        .mem_access_addr(wr_data_address),
-        .mem_write_en(wr_mem_write),
-        .mem_read_en(wr_mem_read),
+        .write_data(wr_write_data),
+        .data_address_1(wr_data_address),
+        .mem_write(wr_mem_write),
+        .mem_read(wr_mem_read),
         .dump_mem(wr_mem_end),
 
         //output ports
-        .mem_read_data(wr_data)
+        .data_out_1(wr_data)
     );
 //-----------------------------------------------------------------------
 //-------------------------hardware action-------------------------------
