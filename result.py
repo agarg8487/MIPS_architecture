@@ -529,9 +529,10 @@ if __name__ == "__main__":
 
     table = Table(root, ["Register Name", "Value"], column_minwidths=[None, None])
     table.pack(padx=10,pady=10)
-    os.system("sed -e '0,/:/s/:/-/' common_dump/architectural_state.txt > temp.txt")
-    os.system("sed -e 's/[ \t]//g' temp.txt > final.txt")
-    filepath = 'final.txt'
+    # os.system("sed -e '0,/:/s/:/-/' common_dump/architectural_state.txt > temp.txt")
+    # os.system("sed -e 's/[ \t]//g' temp.txt > final.txt")
+    # filepath = 'final.txt'
+    filepath = 'common_dump/architectural_state.txt'
     arr=[]
     for i in range(0,32):
 	    arr.append([])
@@ -545,17 +546,16 @@ if __name__ == "__main__":
         arr[i][0]=temp
     i=0
     with open(filepath) as fp:
-        line = fp.readline()
-        while line:
-            arr[i][1]=line
-            line = fp.readline()
-            i=i+1
+        for line in fp :
+            for word in line.split() :
+                arr[i][1] = word
+                i=i+1     
     table.set_data(arr)
     
     # table.insert_row([22,23,24])
     # table.insert_row([25,26,27])
-    os.system("rm temp.txt")
-    os.system("rm final.txt")
+    # os.system("rm temp.txt")
+    # os.system("rm final.txt")
     root.update()
     root.geometry("%sx%s"%(root.winfo_reqwidth(),250))
 
