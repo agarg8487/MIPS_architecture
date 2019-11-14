@@ -547,12 +547,9 @@ if __name__ == "__main__":
     with open(filepath) as fp:
         line = fp.readline()
         while line:
-            arr1=line.split("-")
-	
-    for j in range(0,2):
-		 arr[i][j] = arr1[j]
-         line = fp.readline()
-	i=i+1
+            arr[i][1]=line
+            line = fp.readline()
+            i=i+1
     table.set_data(arr)
     
     # table.insert_row([22,23,24])
