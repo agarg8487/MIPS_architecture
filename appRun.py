@@ -95,8 +95,8 @@ class Notepad:
 		self.__thisEditMenu.add_command(label="Simulate", 
 										command=self.__run)	
 	        # to give a feature of copy	 
-		self.__thisEditMenu.add_command(label="Show Registers", 
-										command=self.__showRegisters)		 	 
+		self.__thisEditMenu.add_command(label="Show Result", 
+										command=self.__showResult)		 	 
 				 
 		
 		# To give a feature of editing 
@@ -118,9 +118,10 @@ class Notepad:
 		self.__root.destroy() 
 		# exit() 
 
-	def __showRegisters(self): 
-		os.system("python result.py") 
-
+	def __showResult(self): 
+		os.system("python reg_result.py") 
+		os.system("python mem_result.py") 
+		
 	def __openFile(self): 
 		
 		self.__file = askopenfilename(defaultextension=".txt", 
