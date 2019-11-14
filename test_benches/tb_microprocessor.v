@@ -77,6 +77,7 @@ module tb_microprocessor();
         
         //input ports
         .clk(clk),
+        .reset(reset),
         .write_data(wr_write_data),
         .data_address_1(wr_data_address),
         .mem_write(wr_mem_write),
