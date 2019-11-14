@@ -15,7 +15,6 @@ module mod_instruction_mem_rom (
 //-------------------------hardware action-------------------------------
     always @(*) begin
         case (address)
-<<<<<<< HEAD
             0 : instruction = 32'b00000000000000000000000000100010;
             1 : instruction = 32'b00100000000000010000000000000001;
             2 : instruction = 32'b00000000000000010001000000100000;
@@ -64,11 +63,4 @@ module mod_instruction_mem_rom (
         endcase
     end
     assign mem_end = (address > 43) ? 1'b1 : 1'b0;//-----------------------------------------------------------------------
-=======
-            0 : instruction = 32'b00100000000000010000000000001101;
-            default : instruction = 0;
-        endcase
-    end
-    assign mem_end = (address > 0) ? 1'b1 : 1'b0;//-----------------------------------------------------------------------
->>>>>>> refs/remotes/origin/master
 endmodule
