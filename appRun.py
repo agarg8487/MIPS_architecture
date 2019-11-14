@@ -1,7 +1,7 @@
 import tkinter 
 import os
 import converter
-import tester	 
+ 
 from tkinter import *
 from tkinter.messagebox import *
 from tkinter.filedialog import *
@@ -181,7 +181,7 @@ class Notepad:
 		print(os.path.basename(self.__file))
 		converter.converter(os.path.basename(self.__file)) 
 	def __run(self): 
-		os.system("python tester.py")
+		os.system("python result.py")
 
 	def run(self): 
 

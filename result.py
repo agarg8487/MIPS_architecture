@@ -539,7 +539,10 @@ if __name__ == "__main__":
 	    for j in range(0,2):
 		    arr[i].append("a")
 		    arr[i][j]=""
-    
+    arr[0][0]="PC Reg"
+    for i in range(1,32):
+        temp="R"+str(i)
+        arr[i][0]=temp
     i=0
     with open(filepath) as fp:
         line = fp.readline()
